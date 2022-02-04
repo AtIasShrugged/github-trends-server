@@ -1,4 +1,21 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { SearchQueryDto } from 'src/common/dto/search-query.dto';
 
 @Controller('trends')
-export class TrendsController {}
+export class TrendsController {
+  @Get()
+  findAll(): string {
+    return 'This action returns all trends';
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string, @Query() searchQuery: SearchQueryDto) {
+    console.log(searchQuery);
+    return `This action returns trend by #${id} or name`;
+  }
+
+  @Get('sync')
+  sync() {
+    return 'This action reset the internal timer for the automatic sync';
+  }
+}
