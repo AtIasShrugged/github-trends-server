@@ -11,11 +11,6 @@ export class TrendsController {
     return this.trendsService.findAll();
   }
 
-  @Get('sync')
-  sync() {
-    return 'This action reset the internal timer for the automatic sync';
-  }
-
   @Get('repo/:id')
   findOne(@Param('id') id: string, @Query() searchQuery: SearchQueryDto) {
     return this.trendsService.findOne(id, searchQuery);
