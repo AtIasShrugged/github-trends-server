@@ -4,5 +4,5 @@ type searchFilterType = 'id' | 'name';
 
 export class SearchQueryDto {
   @IsOptional()
-  seacrhFilter: searchFilterType;
+  filter: searchFilterType;
 }
