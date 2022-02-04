@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TrendsController } from './trends/trends.controller';
+import { TrendsModule } from './trends/trends.module';
 
 @Module({
-  imports: [],
-  controllers: [TrendsController],
+  imports: [TrendsModule],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}
