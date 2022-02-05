@@ -1,8 +1,7 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { TimedRequestService } from 'src/timed-request/timed-request.service';
+import { TimedRequestService } from '../timed-request/timed-request.service';
 import { SearchQueryDto } from './dto/search-query.dto';
 import { TrendsService } from './trends.service';
-import { Logger } from '@nestjs/common';
 
 @Controller('trends')
 export class TrendsController {
@@ -10,11 +9,11 @@ export class TrendsController {
     private readonly trendsService: TrendsService,
     private readonly timedRequestService: TimedRequestService,
   ) {
-    this.timedRequestService.init((mes) => Logger.log(mes), 5000, 'test');
+    this.timedRequestService.init(this.saveTrends.bind(this), 1200000);
   }
 
   @Get()
-  findAll(): string {
+  findAll() {
     return this.trendsService.findAll();
   }
 
@@ -26,5 +25,9 @@ export class TrendsController {
   @Get('repo/:id')
   findOne(@Param('id') id: string, @Query() searchQuery: SearchQueryDto) {
     return this.trendsService.findOne(id, searchQuery);
+  }
+
+  saveTrends() {
+    return this.trendsService.saveTrends();
   }
 }
