@@ -6,7 +6,9 @@ import 'dotenv/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forRoot(
+      `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ywt8z.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`,
+    ),
     TrendsModule,
     TimedRequestModule,
   ],
