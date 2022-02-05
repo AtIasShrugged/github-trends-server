@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SearchQueryDto } from 'src/common/dto/search-query.dto';
+import { SearchQueryDto } from './dto/search-query.dto';
 
 @Injectable()
 export class TrendsService {

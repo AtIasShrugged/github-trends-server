@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { SearchQueryDto } from 'src/common/dto/search-query.dto';
+import { SearchQueryDto } from './dto/search-query.dto';
 import { TrendsService } from './trends.service';
 
 @Controller('trends')
