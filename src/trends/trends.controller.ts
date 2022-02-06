@@ -5,6 +5,8 @@ import { TrendsService } from './trends.service';
 
 @Controller('trends')
 export class TrendsController {
+  private readonly logger = new Logger(TrendsController.name);
+
   constructor(
     private readonly trendsService: TrendsService,
     private readonly timedRequestService: TimedRequestService,
@@ -20,7 +22,7 @@ export class TrendsController {
   @Get('sync')
   sync() {
     const res = this.timedRequestService.sync();
-    Logger.log('Interval was refreshed');
+    this.logger.log('Interval was refreshed');
     return res;
   }
 
@@ -31,7 +33,7 @@ export class TrendsController {
 
   saveTrends() {
     const trends = this.trendsService.saveTrends();
-    Logger.log('Trend repositories saved');
+    this.logger.log('Trend repositories saved');
     return trends;
   }
 }
