@@ -22,7 +22,7 @@ export class TrendsService {
 
   findOne(id: string, searchQuery: SearchQueryDto) {
     if (searchQuery.filter === 'name') {
-      return this.trendRepositoryModel.findOne({ name: id }).exec();
+      return this.trendRepositoryModel.findOne({ repositoryName: id }).exec();
     }
 
     return this.trendRepositoryModel.findById(id).exec();
