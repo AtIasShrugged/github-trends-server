@@ -1,8 +1,10 @@
 import { Controller, Get, Logger, Param, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { TimedRequestService } from '../timed-request/timed-request.service';
 import { SearchQueryDto } from './dto/search-query.dto';
 import { TrendsService } from './trends.service';
 
+@ApiTags('trends')
 @Controller('trends')
 export class TrendsController {
   private readonly logger = new Logger(TrendsController.name);
