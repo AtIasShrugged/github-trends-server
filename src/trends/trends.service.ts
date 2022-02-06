@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateTrendDto } from './dto/create-trend.dto';
@@ -20,12 +20,21 @@ export class TrendsService {
     return this.trendRepositoryModel.find().exec();
   }
 
-  findOne(id: string, searchQuery: SearchQueryDto) {
+  async findOne(id: string, searchQuery: SearchQueryDto) {
+    let repository;
     if (searchQuery.filter === 'name') {
-      return this.trendRepositoryModel.findOne({ repositoryName: id }).exec();
+      repository = await this.trendRepositoryModel
+        .findOne({ repositoryName: id })
+        .exec();
+    } else {
+      repository = await this.trendRepositoryModel.findById(id).exec();
     }
 
-    return this.trendRepositoryModel.findById(id).exec();
+    if (!repository) {
+      throw new NotFoundException(`Trend repository #${id} not found`);
+    }
+
+    return repository;
   }
 
   async saveTrends() {
