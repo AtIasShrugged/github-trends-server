@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Logger, Param, Query } from '@nestjs/common';
 import { TimedRequestService } from '../timed-request/timed-request.service';
 import { SearchQueryDto } from './dto/search-query.dto';
 import { TrendsService } from './trends.service';
@@ -19,7 +19,9 @@ export class TrendsController {
 
   @Get('sync')
   sync() {
-    return this.timedRequestService.sync();
+    const res = this.timedRequestService.sync();
+    Logger.log('Interval was refreshed');
+    return res;
   }
 
   @Get('repo/:id')
@@ -28,6 +30,8 @@ export class TrendsController {
   }
 
   saveTrends() {
-    return this.trendsService.saveTrends();
+    const trends = this.trendsService.saveTrends();
+    Logger.log('Trend repositories saved');
+    return trends;
   }
 }
