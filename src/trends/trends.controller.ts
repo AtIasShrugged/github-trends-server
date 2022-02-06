@@ -13,7 +13,7 @@ export class TrendsController {
     private readonly trendsService: TrendsService,
     private readonly timedRequestService: TimedRequestService,
   ) {
-    this.timedRequestService.init(this.saveTrends.bind(this), 1200000);
+    this.timedRequestService.init(this.saveTrends.bind(this), 3600000);
   }
 
   @Get()
@@ -28,7 +28,7 @@ export class TrendsController {
     return res;
   }
 
-  @Get('repo/:id')
+  @Get(':id')
   findOne(@Param('id') id: string, @Query() searchQuery: SearchQueryDto) {
     return this.trendsService.findOne(id, searchQuery);
   }
