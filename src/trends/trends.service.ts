@@ -8,6 +8,7 @@ import {
   TrendRepository,
   TrendRepositoryDocument,
 } from './schemas/trendRepository.schema';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 
 @Injectable()
 export class TrendsService {
@@ -16,8 +17,12 @@ export class TrendsService {
     private trendRepositoryModel: Model<TrendRepositoryDocument>,
   ) {}
 
-  findAll() {
-    return this.trendRepositoryModel.find().exec();
+  findAll(paginationQuery: PaginationQueryDto) {
+    const { limit = 10, offset = 0 } = paginationQuery;
+
+    return this.trendRepositoryModel
+      .find({}, null, { limit: limit, skip: offset })
+      .exec();
   }
 
   async findOne(id: string, searchQuery: SearchQueryDto) {

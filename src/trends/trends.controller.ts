@@ -1,6 +1,7 @@
 import { Controller, Get, Logger, Param, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { TimedRequestService } from '../timed-request/timed-request.service';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { SearchQueryDto } from './dto/search-query.dto';
 import { TrendsService } from './trends.service';
 
@@ -17,8 +18,8 @@ export class TrendsController {
   }
 
   @Get()
-  findAll() {
-    return this.trendsService.findAll();
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return this.trendsService.findAll(paginationQuery);
   }
 
   @Get('sync')
