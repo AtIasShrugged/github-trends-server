@@ -18,7 +18,9 @@ export class TrendsService {
   ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
-    const { limit = 10, offset = 0 } = paginationQuery;
+    let { limit, offset } = paginationQuery;
+    limit = isNaN(limit) ? 10 : limit;
+    offset = isNaN(offset) ? 0 : offset;
 
     return this.trendRepositoryModel
       .find({}, null, { limit: limit, skip: offset })
