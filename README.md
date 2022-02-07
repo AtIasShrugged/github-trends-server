@@ -23,4 +23,4 @@ npm start
 - **_/trends_** - get all trend repositories from db
 - **_/trends/:id_** - get trend repository from db by id
   - **_/trends/:id?filter=name_** - optional. get trend repository from db by name
-- **_/trends/sync_** - reset the internal timer for accessing the github trends api
+- **_/trends/sync_** - reset the internal request timer to the github trends api
