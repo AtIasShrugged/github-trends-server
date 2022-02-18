@@ -14,7 +14,7 @@ export class TrendsController {
     private readonly trendsService: TrendsService,
     private readonly timedRequestService: TimedRequestService,
   ) {
-    this.timedRequestService.init(this.saveTrends.bind(this), 86400000);
+    // this.timedRequestService.init(this.saveTrends.bind(this), 86400000);
   }
 
   @Get()

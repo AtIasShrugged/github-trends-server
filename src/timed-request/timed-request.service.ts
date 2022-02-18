@@ -15,6 +15,9 @@ export class TimedRequestService {
   }
 
   sync() {
+    if (!this.timer) {
+      return `There is no interval at this time`;
+    }
     clearInterval(this.timer);
     this.init(this.callback, this.ms, this.args);
     return 'Interval was refreshed';
